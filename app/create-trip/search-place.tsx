@@ -16,9 +16,12 @@ import { useTrip } from "@/context/TripContext";
 export default function SearchPlace() {
   const [search, setSearch] = React.useState("");
   const router = useRouter();
-  const { setTripSearch } = useTrip();
+  const { trip, setTrip } = useTrip();
   const onSearch = () => {
-    setTripSearch(search);
+    setTrip({
+      ...trip,
+      place: search,
+    });
     router.push("/create-trip/select-traveler");
   };
 

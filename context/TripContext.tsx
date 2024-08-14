@@ -1,9 +1,14 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+interface TripProps {
+  place?: string;
+  traveler?: number;
+}
+
 // Define the shape of your context data
 interface TripContextType {
-  tripSearch: string;
-  setTripSearch: React.Dispatch<React.SetStateAction<string>>;
+  trip: TripProps;
+  setTrip: React.Dispatch<React.SetStateAction<TripProps>>;
 }
 
 // Create the context with a default value of null
@@ -11,10 +16,10 @@ const CreateTripContext = createContext<TripContextType | undefined>(undefined);
 
 // Create a custom provider component
 export const CreateTripProvider = ({ children }: { children: ReactNode }) => {
-  const [tripSearch, setTripSearch] = useState<string>("");
+  const [trip, setTrip] = useState<TripProps>({});
 
   return (
-    <CreateTripContext.Provider value={{ tripSearch, setTripSearch }}>
+    <CreateTripContext.Provider value={{ trip, setTrip }}>
       {children}
     </CreateTripContext.Provider>
   );
