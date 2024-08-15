@@ -47,6 +47,23 @@ export default function SearchPlace() {
           <Ionicons name="search" size={24} color={Colors.PRIMARY} />
         </TouchableOpacity>
       </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 24,
+        }}
+      >
+        <Ionicons name="location-sharp" size={40} color={Colors.PRIMARY} />
+        <Text style={styles.heading}>Search you trip place</Text>
+        <Text style={styles.description}>
+          Search for a place to start your trip and explore the world with us.
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={onSearch}>
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -58,6 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     paddingTop: 24,
     paddingHorizontal: 24,
+    justifyContent: "center",
   },
   input: {
     borderColor: Colors.GRAY,
@@ -67,5 +85,28 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     fontFamily: "outfit",
     color: Colors.PRIMARY,
+  },
+  heading: {
+    fontSize: 24,
+    textAlign: "center",
+    color: Colors.PRIMARY,
+    fontFamily: "outfit-bold",
+  },
+  description: {
+    fontSize: 16,
+    color: Colors.GRAY,
+    fontFamily: "outfit-medium",
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: Colors.PRIMARY,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 50,
+  },
+  buttonText: {
+    color: Colors.WHITE,
+    fontSize: 16,
+    fontFamily: "outfit-medium",
   },
 });

@@ -3,6 +3,9 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface TripProps {
   place?: string;
   traveler?: number;
+  startDate?: Date;
+  endDate?: Date;
+  totalDays?: number;
 }
 
 // Define the shape of your context data
