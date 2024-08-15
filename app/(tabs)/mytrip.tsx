@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import StartNewTrip from "@/components/StartNewTrip";
 import { Colors } from "@/constants/Colors";
+import { auth } from "@/configs/FirebaseConfig";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Mytrip() {
   const [trips, setTrips] = useState([]);
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>

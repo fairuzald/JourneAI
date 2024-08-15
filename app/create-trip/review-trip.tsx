@@ -65,7 +65,7 @@ export default function SelectBudget() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            router.push("/create-trip/review-trip");
+            router.push("/create-trip/generate-trip");
           }}
         >
           <Text style={styles.buttonText}>Build My Trip</Text>
