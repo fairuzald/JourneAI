@@ -4,6 +4,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 import React, { useEffect } from "react";
 import { SelectTravelerList } from "@/constants/traveler-option";
@@ -17,6 +18,18 @@ export default function SelectTraveler() {
   const [selectedId, setSelectedId] = React.useState(0);
   const { trip, setTrip } = useTrip();
   const router = useRouter();
+
+  const onSelect = () => {
+    if (selectedId === 0) {
+      ToastAndroid.show("Please select a traveler", ToastAndroid.SHORT);
+      return;
+    }
+    setTrip({
+      ...trip,
+      traveler: selectedId,
+    });
+    router.push("/create-trip/select-date");
+  };
 
   return (
     <View style={styles.container}>
@@ -43,16 +56,7 @@ export default function SelectTraveler() {
             marginTop: 20,
           }}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setTrip({
-              ...trip,
-              traveler: selectedId,
-            });
-            router.push("/create-trip/select-date");
-          }}
-        >
+        <TouchableOpacity style={styles.button} onPress={onSelect}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>

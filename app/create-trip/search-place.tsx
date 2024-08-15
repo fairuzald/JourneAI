@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ToastAndroid,
 } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
@@ -18,9 +19,13 @@ export default function SearchPlace() {
   const router = useRouter();
   const { trip, setTrip } = useTrip();
   const onSearch = () => {
+    if (!search) {
+      ToastAndroid.show("Please enter a destination", ToastAndroid.SHORT);
+      return;
+    }
     setTrip({
       ...trip,
-      place: search,
+      destination: search,
     });
     router.push("/create-trip/select-traveler");
   };

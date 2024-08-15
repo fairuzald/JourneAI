@@ -4,6 +4,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 import React from "react";
 import { SelectBudgetList } from "@/constants/budget-option";
@@ -17,6 +18,18 @@ export default function SelectBudget() {
   const [selectedId, setSelectedId] = React.useState(0);
   const { trip, setTrip } = useTrip();
   const router = useRouter();
+
+  const onSelect = () => {
+    if (selectedId === 0) {
+      ToastAndroid.show("Please select a budget", ToastAndroid.SHORT);
+      return;
+    }
+    setTrip({
+      ...trip,
+      budget: selectedId,
+    });
+    router.push("/create-trip/review-trip");
+  };
 
   return (
     <View style={styles.container}>
@@ -43,16 +56,7 @@ export default function SelectBudget() {
             marginTop: 20,
           }}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setTrip({
-              ...trip,
-              budget: selectedId,
-            });
-            router.push("/create-trip/select-date");
-          }}
-        >
+        <TouchableOpacity style={styles.button} onPress={onSelect}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>

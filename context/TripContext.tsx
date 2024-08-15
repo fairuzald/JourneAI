@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface TripProps {
-  place?: string;
+  destination?: string;
   traveler?: number;
   startDate?: Date;
   endDate?: Date;
