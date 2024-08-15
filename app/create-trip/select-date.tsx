@@ -11,11 +11,13 @@ import { Colors } from "@/constants/Colors";
 import CalendarPicker, { ChangedDate } from "react-native-calendar-picker";
 import moment, { Moment } from "moment";
 import { useTrip } from "@/context/TripContext";
+import { useRouter } from "expo-router";
 
 export default function SelectDate() {
   const [startDate, setStartDate] = React.useState<Moment | null>(null);
   const [endDate, setEndDate] = React.useState<Moment | null>(null);
   const { trip, setTrip } = useTrip();
+  const router = useRouter();
 
   const onDateSelect = () => {
     if (!startDate || !endDate) {
@@ -36,6 +38,7 @@ export default function SelectDate() {
       endDate: endDate.toDate(),
       totalDays: totalNoOfDays,
     });
+    router.push("/create-trip/select-budget");
   };
 
   const onDateChange = (date: Date, type: ChangedDate) => {

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { SelectTravelerType } from "@/constants/options";
+import { SelectTravelerType } from "@/constants/traveler-option";
 import { Colors } from "@/constants/Colors";
 
 export default function OptionCard({

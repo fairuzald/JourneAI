@@ -5,15 +5,15 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect } from "react";
-import { SelectTravelerList } from "@/constants/traveler-option";
+import React from "react";
+import { SelectBudgetList } from "@/constants/budget-option";
 import OptionCard from "@/components/OptionCard";
 import { Colors } from "@/constants/Colors";
 import Header from "@/components/header";
 import { useTrip } from "@/context/TripContext";
 import { useRouter } from "expo-router";
 
-export default function SelectTraveler() {
+export default function SelectBudget() {
   const [selectedId, setSelectedId] = React.useState(0);
   const { trip, setTrip } = useTrip();
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function SelectTraveler() {
         <Text style={styles.header}>Who's Travelling</Text>
         <Text style={styles.desc}>Choose your traveles</Text>
         <FlatList
-          data={SelectTravelerList}
+          data={SelectBudgetList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -48,7 +48,7 @@ export default function SelectTraveler() {
           onPress={() => {
             setTrip({
               ...trip,
-              traveler: selectedId,
+              budget: selectedId,
             });
             router.push("/create-trip/select-date");
           }}

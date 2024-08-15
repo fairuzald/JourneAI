@@ -6,6 +6,7 @@ interface TripProps {
   startDate?: Date;
   endDate?: Date;
   totalDays?: number;
+  budget?: number;
 }
 
 // Define the shape of your context data
