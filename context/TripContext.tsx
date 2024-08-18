@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface TripProps {
+export interface TripProps {
   destination?: string;
   traveler?: number;
   startDate?: Date;

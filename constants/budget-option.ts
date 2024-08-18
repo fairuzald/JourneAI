@@ -19,4 +19,8 @@ export const SelectBudgetList = [
   },
 ];
 
+export const findBudgetById = (id: number) => {
+  return SelectBudgetList.find((item) => item.id === id);
+};
+
 export type SelectTravelerType = (typeof SelectBudgetList)[number];

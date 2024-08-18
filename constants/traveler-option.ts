@@ -31,4 +31,8 @@ export const SelectTravelerList = [
   },
 ];
 
+export const findTravelerById = (id: number) => {
+  return SelectTravelerList.find((item) => item.id === id);
+};
+
 export type SelectTravelerType = (typeof SelectTravelerList)[number];
