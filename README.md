@@ -1,6 +1,15 @@
-# Welcome to your Expo app 👋
+# Welcome to JourneAI 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+JourneAI is a cutting-edge travel planning app that harnesses the power of artificial intelligence to provide personalized travel tips and streamline your journey planning. Designed to make your travel experience seamless and enjoyable, JourneAI offers a range of features to help you plan your next adventure with ease.
+
+## Features
+
+- **AI-Powered Recommendations**: Get personalized travel tips based on your preferences, including top attractions, local dining options, and hidden gems.
+- **Custom Itinerary Planning**: Generate detailed travel itineraries that include optimized routes, must-visit spots, and activity suggestions tailored to your interests.
+- **User Profiles**: Create and manage user profiles to save your preferences, past trips, and personalized recommendations.
+- **Real-Time Updates**: Receive real-time updates and notifications about your travel plans, including weather conditions, travel advisories, and more.
+- **Interactive Maps**: Explore interactive maps with points of interest, routes, and navigation assistance to make your journey smoother.
+- **Multi-Platform Support**: Available on Android, iOS, and web platforms to ensure you can access your travel plans from any device.
 
 ## Get started
 
@@ -34,17 +43,3 @@ npm run reset-project
 ```
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
