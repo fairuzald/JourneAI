@@ -13,7 +13,6 @@ import { useTrip } from "@/context/TripContext";
 import { useRouter } from "expo-router";
 import BasicCard from "@/components/BasicCard";
 import { ReviewLabel } from "@/constants/review-label";
-import SelectTraveler from "./select-traveler";
 import { SelectTravelerList } from "@/constants/traveler-option";
 import { SelectBudgetList } from "@/constants/budget-option";
 

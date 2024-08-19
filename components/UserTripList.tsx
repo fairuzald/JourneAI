@@ -12,11 +12,48 @@ import { findTravelerById } from "@/constants/traveler-option";
 import { Colors } from "@/constants/Colors";
 import TravelDetailCard from "./TravelDetailCard";
 import { UserTripData } from "@/types/trip";
+import { useRouter } from "expo-router";
+import { getRandomImageArray } from "@/utils/travel-images";
+import { capitalize } from "@/utils/word-formatter";
+import { findBudgetById } from "@/constants/budget-option";
 
 export default function UserTripList({ data }: { data: UserTripData[] }) {
+  const router = useRouter();
+
   if (!data || data.length === 0) {
     return <Text>No data</Text>;
   }
+
+  const images = getRandomImageArray(data.length);
+
+  const handlePress = (trip: UserTripData, image: string) => {
+    router.push({
+      pathname: "/trip-details",
+      params: {
+        trip: JSON.stringify(trip),
+        image: JSON.stringify(image),
+      },
+    });
+  };
+
+  const renderTripDetails = (trip: UserTripData) => {
+    return (
+      <View style={styles.tripDetails}>
+        <Text style={styles.tripDetailText}>
+          {dateFormatter(
+            new Date(trip.tripData.startDate.seconds * 1000),
+            new Date(trip.tripData.endDate.seconds * 1000)
+          )}
+        </Text>
+        <Text style={styles.tripDetailText}>
+          {findTravelerById(trip.tripData.traveler)?.icon}
+          {findTravelerById(trip.tripData.traveler)?.title} {"  "}|{"  "}
+          {findBudgetById(trip.tripData.budget)?.icon}
+          {findBudgetById(trip.tripData.budget)?.title}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <ScrollView
@@ -25,32 +62,26 @@ export default function UserTripList({ data }: { data: UserTripData[] }) {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.tripContainer}>
-        <Image
-          source={require("../assets/images/login.jpg")}
-          style={styles.image}
-        />
+        <Image source={images[0]} style={styles.image} />
         <View style={styles.tripInfoContainer}>
           <Text style={styles.bigDestination}>
-            {data[0].tripData.destination}
+            {capitalize(data[0].tripData.destination)}
           </Text>
-          <View style={styles.tripDetails}>
-            <Text>
-              {dateFormatter(
-                new Date(data[0].tripData.startDate.seconds * 1000),
-                new Date(data[0].tripData.endDate.seconds * 1000)
-              )}
-            </Text>
-            <Text>
-              {findTravelerById(data[0].tripData.traveler)?.icon}
-              {findTravelerById(data[0].tripData.traveler)?.title}
-            </Text>
-          </View>
+          {renderTripDetails(data[0])}
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handlePress(data[0], images[0])}
+        >
           <Text style={styles.buttonText}>See your plans</Text>
         </TouchableOpacity>
         {data.slice(1).map((trip, index) => (
-          <TravelDetailCard key={index} {...trip.tripData} />
+          <TouchableOpacity
+            key={index}
+            onPress={() => handlePress(trip, images[index + 1])}
+          >
+            <TravelDetailCard {...trip.tripData} images={images[index + 1]} />
+          </TouchableOpacity>
         ))}
       </View>
     </ScrollView>
@@ -59,7 +90,7 @@ export default function UserTripList({ data }: { data: UserTripData[] }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 2,
   },
   tripContainer: {
     marginBottom: 20,
@@ -68,20 +99,25 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     borderRadius: 20,
+    marginBottom: 10,
   },
   tripInfoContainer: {
-    marginVertical: 10,
+    marginBottom: 10,
   },
   bigDestination: {
     fontSize: 24,
-    fontWeight: "bold",
     color: "black",
     marginBottom: 5,
+    fontFamily: "outfit-bold",
   },
   tripDetails: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  tripDetailText: {
+    fontFamily: "outfit-medium",
+    color: Colors.GRAY,
   },
   button: {
     backgroundColor: Colors.PRIMARY,

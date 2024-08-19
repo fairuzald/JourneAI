@@ -9,11 +9,9 @@ export interface TripPropsFirebase {
   budget: number;
 }
 
-interface DailyItinerary {
+export interface DailyItinerary {
   title: string;
   schedule: Schedule[];
-  flights: Flight[];
-  hotels: Hotel[];
 }
 
 interface Schedule {
@@ -26,7 +24,7 @@ interface Schedule {
   time: string;
 }
 
-interface Flight {
+export interface Flight {
   airline: string;
   arrivalAirport: string;
   arrivalTime: string;
@@ -37,7 +35,7 @@ interface Flight {
   price: string;
 }
 
-interface Hotel {
+export interface Hotel {
   name: string;
   address: string;
   description: string;
@@ -45,6 +43,8 @@ interface Hotel {
   googleMapUrl: string;
   imageUrl: string;
   nearbyAttractions: NearbyAttraction[];
+  price: string;
+  rating: number;
 }
 
 interface NearbyAttraction {
@@ -58,12 +58,14 @@ interface NearbyAttraction {
 }
 
 interface UserTripDetail {
+  flights: Flight[];
+  hotels: Hotel[];
   dailyItinerary: DailyItinerary[];
-  userEmail: string;
 }
 
 export interface UserTripData {
   tripData: TripPropsFirebase;
   userEmail: string;
-  tripDetails: UserTripDetail[];
+  tripDetails: UserTripDetail;
+  id: string;
 }

@@ -1,4 +1,5 @@
 import {
+  StyleSheet,
   Text,
   TextInput,
   ToastAndroid,
@@ -55,7 +56,6 @@ export default function SignIn() {
         token
       );
 
-      console.log("User signed in:", user.uid);
       ToastAndroid.show("Signed in successfully", ToastAndroid.SHORT);
       router.push("/mytrip");
     } catch (error: any) {
@@ -66,149 +66,111 @@ export default function SignIn() {
       );
     }
   };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 25,
-        flexDirection: "column",
-        gap: 20,
-        backgroundColor: Colors.WHITE,
-      }}
-    >
+    <View style={styles.container}>
       {router.canGoBack() && (
-        <TouchableOpacity>
-          <Ionicons
-            name="arrow-back"
-            size={24}
-            color={Colors.PRIMARY}
-            onPress={() => {
-              router.back();
-            }}
-          />
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={styles.backButton}
+        >
+          <Ionicons name="arrow-back" size={24} color={Colors.PRIMARY} />
         </TouchableOpacity>
       )}
-      <Text
-        style={{
-          fontSize: 28,
-          fontFamily: "outfit-bold",
-          color: Colors.PRIMARY,
-        }}
-      >
-        Let's Sign You In
-      </Text>
+      <Text style={styles.title}>Let's Sign You In!</Text>
+      <Text style={styles.subtitle}>We've been waiting for you!</Text>
 
-      <Text
-        style={{
-          fontSize: 28,
-          fontFamily: "outfit",
-          color: Colors.GRAY,
-        }}
-      >
-        Let's Sign You In
-      </Text>
-
-      <Text
-        style={{
-          fontSize: 28,
-          fontFamily: "outfit",
-          color: Colors.GRAY,
-        }}
-      >
-        You've been missed!
-      </Text>
-
-      <View>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: "outfit",
-            color: Colors.PRIMARY,
-          }}
-        >
-          Email
-        </Text>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Email</Text>
         <TextInput
-          style={{
-            borderColor: Colors.GRAY,
-            borderWidth: 1.5,
-            borderRadius: 10,
-            fontFamily: "outfit",
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            color: Colors.PRIMARY,
-          }}
+          style={styles.input}
           placeholder="Enter your email"
+          value={email}
           onChangeText={(text) => setEmail(text)}
         />
       </View>
-      <View>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: "outfit",
-            color: Colors.PRIMARY,
-          }}
-        >
-          Password
-        </Text>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Password</Text>
         <TextInput
           secureTextEntry
-          style={{
-            borderColor: Colors.GRAY,
-            borderWidth: 1.5,
-            borderRadius: 10,
-            fontFamily: "outfit",
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            color: Colors.PRIMARY,
-          }}
+          style={styles.input}
           placeholder="Enter your password"
+          value={password}
           onChangeText={(text) => setPassword(text)}
         />
       </View>
 
-      <TouchableOpacity
-        style={{
-          backgroundColor: Colors.PRIMARY,
-          padding: 12,
-          borderRadius: 50,
-        }}
-        onPress={onLogin}
-      >
-        <Text
-          style={{
-            color: Colors.WHITE,
-            textAlign: "center",
-            fontFamily: "outfit-semibold",
-          }}
-        >
-          Sign In
-        </Text>
+      <TouchableOpacity style={styles.button} onPress={onLogin}>
+        <Text style={styles.buttonText}>Sign In</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{
-          backgroundColor: Colors.WHITE,
-          padding: 12,
-          borderRadius: 50,
-          borderColor: Colors.PRIMARY,
-          borderWidth: 1.5,
-        }}
-        onPress={() => {
-          router.push("/auth/sign-up");
-        }}
+        style={[styles.button, styles.secondaryButton]}
+        onPress={() => router.push("/auth/sign-up")}
       >
-        <Text
-          style={{
-            color: Colors.PRIMARY,
-            textAlign: "center",
-            fontFamily: "outfit-semibold",
-          }}
-        >
-          Create an account
-        </Text>
+        <Text style={styles.buttonTextSecondary}>Create an Account</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  backButton: {
+    marginBottom: 20,
+  },
+  container: {
+    flex: 1,
+    padding: 25,
+    flexDirection: "column",
+    gap: 20,
+    backgroundColor: Colors.WHITE,
+  },
+  title: {
+    fontSize: 28,
+    fontFamily: "outfit-bold",
+    color: Colors.PRIMARY,
+  },
+  subtitle: {
+    fontSize: 20,
+    fontFamily: "outfit",
+    color: Colors.GRAY,
+    marginBottom: 30,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 16,
+    fontFamily: "outfit",
+    color: Colors.PRIMARY,
+  },
+  input: {
+    borderColor: Colors.GRAY,
+    borderWidth: 1.5,
+    borderRadius: 10,
+    fontFamily: "outfit",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    color: Colors.PRIMARY,
+  },
+  button: {
+    backgroundColor: Colors.PRIMARY,
+    padding: 12,
+    borderRadius: 50,
+  },
+  buttonText: {
+    color: Colors.WHITE,
+    textAlign: "center",
+    fontFamily: "outfit-semibold",
+  },
+  secondaryButton: {
+    backgroundColor: Colors.WHITE,
+    borderColor: Colors.PRIMARY,
+    borderWidth: 1.5,
+  },
+  buttonTextSecondary: {
+    color: Colors.PRIMARY,
+    textAlign: "center",
+    fontFamily: "outfit-semibold",
+  },
+});

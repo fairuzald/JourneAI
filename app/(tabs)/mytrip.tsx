@@ -5,7 +5,13 @@ import StartNewTrip from "@/components/StartNewTrip";
 import { Colors } from "@/constants/Colors";
 import { db } from "@/configs/FirebaseConfig";
 import { useAuth } from "@/hooks/useAuth";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  Timestamp,
+  where,
+} from "firebase/firestore";
 import UserTripList from "@/components/UserTripList";
 import { useRouter } from "expo-router";
 import { UserTripData } from "@/types/trip";
@@ -31,9 +37,14 @@ export default function Mytrip() {
       );
 
       const querySnap = await getDocs(q);
+      const trips: UserTripData[] = [];
       querySnap.forEach((doc) => {
-        setUserTrips((prev) => [...prev, doc.data()] as UserTripData[]);
+        const data = { id: doc.id, ...doc.data() } as UserTripData;
+        if (data.tripData.endDate.seconds > Timestamp.now().seconds) {
+          trips.push(data);
+        }
       });
+      setUserTrips(trips);
     } catch (e) {
       console.log(e);
     } finally {
@@ -54,11 +65,18 @@ export default function Mytrip() {
       </View>
 
       {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <Text>{userTrips.length} Trips</Text>
-      )}
-      {!userTrips || userTrips.length === 0 ? (
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: 24,
+            fontSize: 16,
+            flex: 1,
+            fontFamily: "outfit-bold",
+          }}
+        >
+          Loading
+        </Text>
+      ) : !userTrips || userTrips.length === 0 ? (
         <StartNewTrip />
       ) : (
         <UserTripList data={userTrips} />

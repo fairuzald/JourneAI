@@ -4,21 +4,22 @@ import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
-export default function StartNewTrip() {
+export default function EmptyHistory() {
   const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <Ionicons name="location-sharp" size={40} color={Colors.PRIMARY} />
-      <Text style={styles.heading}>Start a new trip</Text>
+      <Ionicons name="rocket-outline" size={40} color={Colors.PRIMARY} />
+      <Text style={styles.heading}>Blast Off to New Adventures!</Text>
       <Text style={styles.description}>
-        Your travel is currently as blank as a fresh map. Tap below to chart
-        your next exciting journey!
+        Your travel history is currently as empty as a suitcase. Time to pack
+        your bags and start a new journey!
       </Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => router.push("/create-trip/search-place")}
       >
-        <Text style={styles.buttonText}>Plan My Trip</Text>
+        <Text style={styles.buttonText}>Embark on a New Trip</Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     color: Colors.GRAY,
     fontFamily: "outfit-medium",
     textAlign: "center",
+    marginHorizontal: 16,
   },
   heading: {
     fontSize: 24,

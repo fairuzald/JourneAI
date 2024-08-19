@@ -1,11 +1,15 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { dateFormatter } from "@/utils/date-formatter";
 import { Colors } from "@/constants/Colors";
 import { findTravelerById } from "@/constants/traveler-option";
 import { findBudgetById } from "@/constants/budget-option";
 import { TripPropsFirebase } from "@/types/trip";
+import { getRandomImage } from "@/utils/travel-images";
+
+interface TravelDetailCardProps extends TripPropsFirebase {
+  images?: any;
+}
 
 export default function TravelDetailCard({
   destination,
@@ -14,8 +18,8 @@ export default function TravelDetailCard({
   endDate,
   totalDays,
   budget,
-}: TripPropsFirebase) {
-  const router = useRouter();
+  images,
+}: TravelDetailCardProps) {
   const startDateTime = new Date(startDate.seconds * 1000);
   const endDateTime = new Date(endDate.seconds * 1000);
 
@@ -24,15 +28,11 @@ export default function TravelDetailCard({
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
 
+  const imageSource = images ? images : getRandomImage();
+
   return (
-    <TouchableOpacity
-      onPress={() => router.push("/trip-details")}
-      style={styles.card}
-    >
-      <Image
-        style={styles.image}
-        source={require("../assets/images/login.jpg")}
-      />
+    <View style={styles.card}>
+      <Image style={styles.image} source={imageSource} />
       <View style={styles.infoContainer}>
         <Text style={styles.destination}>{capitalizedDestination}</Text>
         <Text style={styles.date}>
@@ -48,7 +48,7 @@ export default function TravelDetailCard({
           {findBudgetById(budget)?.title}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
@@ -83,9 +83,6 @@ const styles = StyleSheet.create({
   },
   date: {
     fontFamily: "outfit-medium",
-  },
-  duration: {
-    fontFamily: "outfit",
   },
   details: {
     fontFamily: "outfit",

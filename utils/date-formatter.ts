@@ -28,3 +28,29 @@ export function dateFormatter(startDate?: Date, endDate?: Date) {
     return "";
   }
 }
+
+export function formatDateTimeIsoString(isoString: string): string {
+  return moment(isoString).format("MMMM Do, HH:mm");
+}
+
+export function formatDuration(
+  departureTime: string,
+  arrivalTime: string
+): string {
+  let string = "";
+  const departure = moment(departureTime);
+  const arrival = moment(arrivalTime);
+  const duration = moment.duration(arrival.diff(departure));
+
+  const hours = Math.floor(duration.asHours());
+  const minutes = duration.minutes();
+
+  if (hours > 0) {
+    string += `${hours}h `;
+  }
+  if (minutes > 0) {
+    string += `${minutes}m`;
+  }
+
+  return string;
+}
